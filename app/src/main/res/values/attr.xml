@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Filter">
+        <attr name="orientation" format="enum">
+            <enum name="vertical" value="0"/>
+            <enum name="horizontal" value="1"/>
+        </attr>
+
+        <attr name="textSize" format="dimension"/>
+
+        <attr name="active_background" format="integer"/>
+
+        <attr name="selected_background" format="integer"/>
+
+        <attr name="text_color" format="color"/>
+
+        <attr name="active_icon" format="integer"/>
+
+        <attr name="selected_icon" format="integer"/>
+
+        <attr name="selected_text_color" format="color"/>
+
+        <attr name="font_name" format="string"/>
+
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="border_color">#66949BA0</color>
+    <color name="bg_color">#DED9E2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="trans">#00FFFFFF</color>
+    <color name="selected_color">#8048c8ef</color>
+    <color name="selected_color_1">#4d00574B</color>
+    <color name="black_olive">#423E37</color>
+
+    <!--
+     Hex Opacity Values
+     Put it at the begining ot the hex color
+
+     100% — FF
+     95% — F2
+     90% — E6
+     85% — D9
+     80% — CC
+     75% — BF
+     70% — B3
+     65% — A6
+     60% — 99
+     55% — 8C
+     50% — 80
+     45% — 73
+     40% — 66
+     35% — 59
+     30% — 4D
+     25% — 40
+     20% — 33
+     15% — 26
+     10% — 1A
+     5% — 0D
+     0% — 00
+-->
+</resources>

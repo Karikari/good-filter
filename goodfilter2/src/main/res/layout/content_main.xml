@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_main">
+
+
+    <com.karikari.goodfilter.SingleFilterWidget
+        android:id="@+id/pills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:orientation="horizontal"
+        app:textSize="15sp"
+        app:selected_text_color="@color/colorAccent"/>
+
+    <com.karikari.goodfilter.MultiFilterWidget
+        android:id="@+id/multi_filtter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:orientation="vertical"
+        app:textSize="18sp"/>
+
+</LinearLayout>

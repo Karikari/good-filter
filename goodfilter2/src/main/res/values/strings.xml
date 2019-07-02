@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GoodFilter</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </string>
+    <string name="some_text">Text</string>
+</resources>
