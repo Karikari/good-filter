@@ -18,3 +18,13 @@
 	        implementation 'com.github.Karikari:good-filter:0.0.2'
 	}
 ```
+**Add the View to your layout**
+```xml
+   <com.karikari.goodfilter.SingleFilterWidget
+        android:id="@+id/pills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:orientation="horizontal"
+        app:textSize="18sp"
+        app:selected_text_color="@color/colorAccent"/>
+```
