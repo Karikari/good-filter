@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         app:orientation="horizontal"
         app:textSize="18sp"
-        app:selected_text_color="@color/colorAccent" />
+        app:selected_text_color="@color/colorAccent"/>
 
     <com.karikari.goodfilter.MultiFilterWidget
         android:visibility="gone"
