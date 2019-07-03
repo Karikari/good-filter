@@ -60,15 +60,15 @@ public class SingleFilterWidget extends LinearLayout {
 
     private void initAttributes(Context context, AttributeSet attrs) {
 
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Filter, 0, 0);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SingleFilterWidget, 0, 0);
         try {
-            this.orientation = typedArray.getInt(R.styleable.Filter_orientation, 0);
-            this.textSize = typedArray.getDimensionPixelSize(R.styleable.Filter_textSize, 18);
-            this.background_active = typedArray.getDrawable(R.styleable.Filter_active_background);
-            this.background_selected = typedArray.getDrawable(R.styleable.Filter_selected_background);
-            this.text_color = typedArray.getColor(R.styleable.Filter_text_color, getResources().getColor(R.color.black_olive));
-            this.text_color_selected = typedArray.getColor(R.styleable.Filter_selected_text_color, getResources().getColor(R.color.colorPrimaryDark));
-            this.font_type = typedArray.getString(R.styleable.Filter_font_name);
+            this.orientation = typedArray.getInt(R.styleable.SingleFilterWidget_orientation, 0);
+            this.textSize = typedArray.getDimensionPixelSize(R.styleable.SingleFilterWidget_textSize, 18);
+            this.background_active = typedArray.getDrawable(R.styleable.SingleFilterWidget_active_background);
+            this.background_selected = typedArray.getDrawable(R.styleable.SingleFilterWidget_selected_background);
+            this.text_color = typedArray.getColor(R.styleable.SingleFilterWidget_text_color, getResources().getColor(R.color.black_olive));
+            this.text_color_selected = typedArray.getColor(R.styleable.SingleFilterWidget_selected_text_color, getResources().getColor(R.color.colorPrimaryDark));
+            this.font_type = typedArray.getString(R.styleable.SingleFilterWidget_font_family);
 
 
             if (this.background_active == null) {

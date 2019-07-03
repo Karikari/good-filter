@@ -15,14 +15,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:orientation="horizontal"
-        app:textSize="15sp"
-        app:selected_text_color="@color/colorAccent"/>
+        app:textSize="18sp"
+        app:selected_text_color="@color/colorAccent" />
 
     <com.karikari.goodfilter.MultiFilterWidget
+        android:visibility="gone"
         android:id="@+id/multi_filtter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:orientation="vertical"
-        app:textSize="18sp"/>
+        app:textSize="18sp"
+        />
 
 </LinearLayout>
