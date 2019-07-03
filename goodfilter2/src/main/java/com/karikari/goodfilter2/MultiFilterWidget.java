@@ -61,17 +61,17 @@ public class MultiFilterWidget extends LinearLayout {
 
     private void initAttributes(Context context, AttributeSet attrs) {
 
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Filter, 0, 0);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MultiFilterWidget, 0, 0);
         try {
-            this.orientation = typedArray.getInt(R.styleable.Filter_orientation, 0);
-            this.textSize = typedArray.getDimensionPixelSize(R.styleable.Filter_textSize, 18);
-            this.background_active = typedArray.getDrawable(R.styleable.Filter_active_background);
-            this.background_selected = typedArray.getDrawable(R.styleable.Filter_selected_background);
-            this.icon_active = typedArray.getDrawable(R.styleable.Filter_active_icon);
-            this.icon_selected = typedArray.getDrawable(R.styleable.Filter_selected_icon);
-            this.text_color = typedArray.getColor(R.styleable.Filter_text_color, getResources().getColor(R.color.black_olive));
-            this.text_color_selected = typedArray.getColor(R.styleable.Filter_selected_text_color, getResources().getColor(R.color.colorAccent));
-            this.font_type = typedArray.getString(R.styleable.Filter_font_name);
+            this.orientation = typedArray.getInt(R.styleable.MultiFilterWidget_orientation, 0);
+            this.textSize = typedArray.getDimensionPixelSize(R.styleable.MultiFilterWidget_textSize, 18);
+            this.background_active = typedArray.getDrawable(R.styleable.MultiFilterWidget_active_background);
+            this.background_selected = typedArray.getDrawable(R.styleable.MultiFilterWidget_selected_background);
+            this.icon_active = typedArray.getDrawable(R.styleable.MultiFilterWidget_active_icon);
+            this.icon_selected = typedArray.getDrawable(R.styleable.MultiFilterWidget_selected_icon);
+            this.text_color = typedArray.getColor(R.styleable.MultiFilterWidget_text_color, getResources().getColor(R.color.black_olive));
+            this.text_color_selected = typedArray.getColor(R.styleable.MultiFilterWidget_selected_text_color, getResources().getColor(R.color.colorAccent));
+            this.font_type = typedArray.getString(R.styleable.MultiFilterWidget_font_family);
 
 
             if (this.background_active == null) {

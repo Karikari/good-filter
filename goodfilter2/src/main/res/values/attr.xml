@@ -1,26 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="Filter">
-        <attr name="orientation" format="enum">
-            <enum name="vertical" value="0"/>
-            <enum name="horizontal" value="1"/>
-        </attr>
 
-        <attr name="textSize" format="dimension"/>
+    <attr name="orientation" format="enum">
+        <enum name="vertical" value="0" />
+        <enum name="horizontal" value="1" />
+    </attr>
 
-        <attr name="active_background" format="integer"/>
+    <attr name="textSize" format="dimension" />
 
-        <attr name="selected_background" format="integer"/>
+    <attr name="active_background" format="reference" />
 
-        <attr name="text_color" format="color"/>
+    <attr name="selected_background" format="reference" />
 
-        <attr name="active_icon" format="integer"/>
+    <attr name="text_color" format="color|reference" />
 
-        <attr name="selected_icon" format="integer"/>
+    <attr name="selected_text_color" format="color" />
 
-        <attr name="selected_text_color" format="color"/>
+    <attr name="font_family" format="string" />
 
-        <attr name="font_name" format="string"/>
+    <declare-styleable name="SingleFilterWidget">
+        <attr name="orientation"/>
+
+        <attr name="textSize" />
+
+        <attr name="active_background" />
+
+        <attr name="selected_background" />
+
+        <attr name="text_color" />
+
+        <attr name="selected_text_color" />
+
+        <attr name="font_family" />
+
+    </declare-styleable>
+
+    <declare-styleable name="MultiFilterWidget">
+        <attr name="orientation"/>
+
+        <attr name="textSize" />
+
+        <attr name="active_background" />
+
+        <attr name="selected_background" />
+
+        <attr name="text_color" />
+
+        <attr name="active_icon" format="reference" />
+
+        <attr name="selected_icon" format="reference" />
+
+        <attr name="selected_text_color" />
+
+        <attr name="font_family" />
 
     </declare-styleable>
 
