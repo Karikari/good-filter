@@ -3,7 +3,7 @@
 
 [![](https://jitpack.io/v/Karikari/good-filter.svg)](https://jitpack.io/#Karikari/good-filter)
 
-##### SingleFilterWigdet
+### SingleFilterWigdet
 
 | Horizontal View        | Vertical View           |
 | ------------- |:-------------:| 
