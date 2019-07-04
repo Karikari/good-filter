@@ -44,20 +44,20 @@
    <?xml version="1.0" encoding="utf-8"?>
    <shape xmlns:android="http://schemas.android.com/apk/res/android"
        	  android:shape="rectangle">
-   	  <solid android:color="@color/white" />
-   	  <stroke android:width="1dp" android:color="@color/border_color"/>
+   	  <solid android:color="#FFFFFF" />
+   	  <stroke android:width="1dp" android:color="#949BA0"/>
     	  <padding  android:left="10dp" android:right="10dp" android:top="5dp" android:bottom="5dp"/>
     	  <corners android:radius="50dp"/>
    </shape>
    
    The style can also change when an item is selected by using this attribute
    app:selected_background="@drawable/selected_bg"
-   res/drawable/active_bg
+   res/drawable/selected_bg
    <?xml version="1.0" encoding="utf-8"?>
    <shape xmlns:android="http://schemas.android.com/apk/res/android"
        	  android:shape="rectangle">
-   	  <solid android:color="@color/white" />
-   	  <stroke android:width="1dp" android:color="@color/selected_color"/>
+   	  <solid android:color="#FFFFFF" />
+   	  <stroke android:width="1dp" android:color="#008577"/>
     	  <padding  android:left="10dp" android:right="10dp" android:top="5dp" android:bottom="5dp"/>
     	  <corners android:radius="50dp"/>
    </shape>
@@ -65,8 +65,8 @@
   **Available Attributes which can be use to customize the widget**
   app:orientation="horizontal"
   app:textSize="18sp" 
-  app:text_color="@color/black_olive" 
-  app:selected_text_color="@color/colorAccent"
+  app:text_color="#423E37" 
+  app:selected_text_color="#D81B60"
   app:active_background="@drawable/active_bg
   app:font_family="@string/roboto"  // Save the fonts in the assets folder and pass the fontname
   app:selected_background="@drawable/selected_bg"
