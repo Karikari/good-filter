@@ -71,4 +71,30 @@
   app:font_family="@string/roboto"  // Save the fonts in the assets folder and pass the fontname
   app:selected_background="@drawable/selected_bg"
 ```
-**
+**Usage**
+```java
+   SingleFilterWidget singleFilter = findViewById(R.id.pills);
+   List<String> items = new ArrayList<>();
+   items.add("All");
+   items.add("Related");
+   items.add("Water");
+   items.add("Phones");
+   items.add("Coke Bottles");
+   items.add("Table and Chair");
+   items.add("Love and Sex");
+   items.add("Hate and Money");
+   items.add("Mercy with Juctice");
+   items.add("Football");
+   items.add("Legendary");
+   items.add("CAF");
+   items.add("All be lies");
+   
+    singleFilter.setItems(items);
+    singleFilter.setSelected_valued("All"); //Set a default value. if needed
+    singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
+         @Override
+         public void onFiltered(String v) {
+                
+         }
+    });
+```
