@@ -129,5 +129,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:orientation="horizontal"
+        app:active_icon="@drawable/star_black_hollow"
+        app:selected_icon="@drawable/star_black"
         app:textSize="18sp" />
+
+The attribute is the same as the SingleFilterWidget
+```
+```java
+   multiFilterWidget.setItems(items);
+
+   multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {
+        @Override
+        public void onFiltered(String v) {
+             //Log.d(TAG, v);
+        }
+
+        @Override
+        public void onFiltered(List<String> items) {
+
+        }
+  });
 ```
