@@ -105,6 +105,7 @@
 | Horizontal View        | Vertical View           |
 | ------------- |:-------------:| 
 | <img src="https://user-images.githubusercontent.com/6484414/60653677-09ba3200-9e3a-11e9-91ec-a4883969d3aa.gif" width="400" height="750" />     | <img src="https://user-images.githubusercontent.com/6484414/60653702-176fb780-9e3a-11e9-94f9-e1dd9b3c7bc0.gif" width="400" height="750" /> |
+
 **Add view to Layout**
 ```xml
    <com.karikari.goodfilter.MultiFilterWidget
@@ -119,7 +120,8 @@
 
 | Horizontal View        | Vertical View           |
 | ------------- |:-------------:| 
-| <img src="https://user-images.githubusercontent.com/6484414/60653677-09ba3200-9e3a-11e9-91ec-a4883969d3aa.gif" width="400" height="750" />     | <img src="https://user-images.githubusercontent.com/6484414/60653702-176fb780-9e3a-11e9-94f9-e1dd9b3c7bc0.gif" width="400" height="750" /> |
+| <img src="https://user-images.githubusercontent.com/6484414/60655133-c4e3ca80-9e3c-11e9-84de-d5c9d549a12f.gif" width="400" height="750" />     | <img src="https://user-images.githubusercontent.com/6484414/60655132-c44b3400-9e3c-11e9-9a49-a47e03147a4a.gif" width="400" height="750" /> |
+
 **Add view to Layout**
 ```xml
    <com.karikari.goodfilter.MultiFilterWidget
