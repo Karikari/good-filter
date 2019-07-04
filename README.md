@@ -105,3 +105,27 @@
 | Horizontal View        | Vertical View           |
 | ------------- |:-------------:| 
 | <img src="https://user-images.githubusercontent.com/6484414/60653677-09ba3200-9e3a-11e9-91ec-a4883969d3aa.gif" width="400" height="750" />     | <img src="https://user-images.githubusercontent.com/6484414/60653702-176fb780-9e3a-11e9-94f9-e1dd9b3c7bc0.gif" width="400" height="750" /> |
+**Add view to Layout**
+```xml
+   <com.karikari.goodfilter.MultiFilterWidget
+        android:id="@+id/multi_filtter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:orientation="horizontal"
+        app:textSize="18sp" />
+```
+
+### MultiFilterWidget with Icons
+
+| Horizontal View        | Vertical View           |
+| ------------- |:-------------:| 
+| <img src="https://user-images.githubusercontent.com/6484414/60653677-09ba3200-9e3a-11e9-91ec-a4883969d3aa.gif" width="400" height="750" />     | <img src="https://user-images.githubusercontent.com/6484414/60653702-176fb780-9e3a-11e9-94f9-e1dd9b3c7bc0.gif" width="400" height="750" /> |
+**Add view to Layout**
+```xml
+   <com.karikari.goodfilter.MultiFilterWidget
+        android:id="@+id/multi_filtter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:orientation="horizontal"
+        app:textSize="18sp" />
+```
