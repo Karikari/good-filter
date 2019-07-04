@@ -92,7 +92,7 @@
    items.add("All be lies");
    
     singleFilter.setItems(items);
-    singleFilter.setSelected_valued("All"); //Set a default value. if needed
+    singleFilter.setDefaultValue("All"); //Set a default value. if needed
     singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
          @Override
          public void onFiltered(String v) {
@@ -154,7 +154,14 @@ The attribute is the same as the SingleFilterWidget
    items.add("CAF");
    items.add("All be lies");
    
+   List<String> defaultvalues = new ArrayList<>();
+   itemdefault.add("All");
+   itemdefault.add("Water");
+   itemdefault.add("Phones");
+   itemdefault.add("Coke Bottles");
+   
    multiFilterWidget.setItems(items);
+   multiFilterWidget.setDefaultValues(defaultvalues); //Set a default value. if needed
    multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {
         @Override
         public void onFiltered(String v) {
@@ -167,3 +174,4 @@ The attribute is the same as the SingleFilterWidget
         }
   });
 ```
+**Enjoy Coding**
