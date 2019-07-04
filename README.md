@@ -135,9 +135,26 @@
 
 The attribute is the same as the SingleFilterWidget
 ```
-```java
-   multiFilterWidget.setItems(items);
+**Usage**
 
+```java
+   MultiFilterWidget multiFilterWidget = findViewById(R.id.multi_filtter);
+   List<String> items = new ArrayList<>();
+   items.add("All");
+   items.add("Related");
+   items.add("Water");
+   items.add("Phones");
+   items.add("Coke Bottles");
+   items.add("Table and Chair");
+   items.add("Love and Sex");
+   items.add("Hate and Money");
+   items.add("Mercy with Juctice");
+   items.add("Football");
+   items.add("Legendary");
+   items.add("CAF");
+   items.add("All be lies");
+   
+   multiFilterWidget.setItems(items);
    multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {
         @Override
         public void onFiltered(String v) {
