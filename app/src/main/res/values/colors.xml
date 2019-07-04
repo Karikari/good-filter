@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="border_color">#66949BA0</color>
+    <color name="border_color">#949BA0</color>
     <color name="bg_color">#DED9E2</color>
     <color name="white">#FFFFFF</color>
     <color name="trans">#00FFFFFF</color>

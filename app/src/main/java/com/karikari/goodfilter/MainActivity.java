@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SingleFilterWidget pillsWidgets = findViewById(R.id.pills);
+        SingleFilterWidget singleFilter = findViewById(R.id.pills);
         MultiFilterWidget multiFilterWidget = findViewById(R.id.multi_filtter);
 
         List<String> list = new ArrayList<>();
@@ -77,10 +77,17 @@ public class MainActivity extends AppCompatActivity {
         itemdefault.add("Football");
 
 
-        pillsWidgets.setItems(items);
+        singleFilter.setItems(items);
+        singleFilter.setDefaultValue("All"); //Set a default value
+        singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
+            @Override
+            public void onFiltered(String v) {
+
+            }
+        });
 
 
-        //multiFilterWidget.setDefaultItems(itemdefault);
+        multiFilterWidget.setDefaultValues(itemdefault);
         multiFilterWidget.setItems(items);
 
         multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {

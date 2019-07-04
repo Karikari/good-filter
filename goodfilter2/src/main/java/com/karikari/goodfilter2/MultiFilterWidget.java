@@ -163,7 +163,7 @@ public class MultiFilterWidget extends LinearLayout {
         setListeners();
     }
 
-    public void setDefaultItems(List<String> items){
+    public void setDefaultValues(List<String> items){
         this.defaultItems =items;
     }
 

@@ -164,11 +164,11 @@ public class SingleFilterWidget extends LinearLayout {
         setListeners();
     }
 
-    public String getSelected_valued() {
+    public String getDefaultValue() {
         return selected_valued;
     }
 
-    public void setSelected_valued(String selected_valued) {
+    public void setDefaultValue(String selected_valued) {
         this.selected_valued = selected_valued;
         setChanges(this.selected_valued);
     }

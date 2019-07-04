@@ -7,24 +7,36 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     android:orientation="vertical"
+    android:padding="5dp"
     tools:showIn="@layout/activity_main">
 
 
     <com.karikari.goodfilter.SingleFilterWidget
+        android:visibility="gone"
         android:id="@+id/pills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:orientation="horizontal"
         app:textSize="18sp"
-        app:selected_text_color="@color/colorAccent"/>
+        app:selected_text_color="@color/colorAccent"
+        app:active_background="@drawable/pill_bg"
+        app:text_color="@color/black_olive" />
 
-    <com.karikari.goodfilter.MultiFilterWidget
+   <!-- <com.karikari.goodfilter.MultiFilterWidget
         android:visibility="gone"
         android:id="@+id/multi_filtter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:orientation="vertical"
-        app:textSize="18sp"
-        />
+        app:orientation="horizontal"
+        app:textSize="18sp" />-->
+
+    <com.karikari.goodfilter.MultiFilterWidget
+        android:id="@+id/multi_filtter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:orientation="horizontal"
+        app:active_icon="@drawable/star_black_hollow"
+        app:selected_icon="@drawable/star_black"
+        app:textSize="18sp" />
 
 </LinearLayout>
