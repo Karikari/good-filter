@@ -18,6 +18,7 @@
 	}
 ```
 **Step 2** Add the dependency
+[![](https://jitpack.io/v/Karikari/good-filter.svg)](https://jitpack.io/#Karikari/good-filter)
 ```gradle
    dependencies {
 	        implementation 'com.github.Karikari:good-filter:0.0.2'
