@@ -31,6 +31,7 @@ public class SingleFilterWidget extends LinearLayout {
     private Drawable background_selected;
     private List<String> items = new ArrayList<>();
     private List<TextView> textViews = new ArrayList<>();
+    private List<ComboView> comboViews = new ArrayList<>();
     private LinearLayout mPillLayout;
     private LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private int text_color;
@@ -99,6 +100,38 @@ public class SingleFilterWidget extends LinearLayout {
 
     }
 
+    private void setListItems() {
+        for (String s : items) {
+            ComboView comboView = new ComboView(context, orientation);
+            comboView.setValue(s);
+            comboView.setText_size(textSize);
+            comboView.setBackground_active(background_active);
+            comboView.setText_color(text_color);
+            if (text_color_selected != -1)
+                comboView.setSelected_text_color(text_color_selected);
+
+            if (typeface != null) {
+                comboView.setFontType(typeface);
+            }
+
+            comboViews.add(comboView);
+            mPillLayout.addView(comboView);
+        }
+    }
+
+    private void setListeners() {
+
+        for (ComboView comboView : comboViews) {
+
+            comboView.getmLayout().setOnClickListener(v -> {
+                comboView.setValueSelect(comboView.isValueSelected());
+                boolean isSelected = comboView.isValueSelected();
+                String value = comboView.getValue();
+            });
+
+        }
+    }
+
 
     private void setListPills() {
         for (String s : items) {
@@ -121,7 +154,7 @@ public class SingleFilterWidget extends LinearLayout {
         }
     }
 
-    private void setListeners() {
+    /*private void setListeners() {
         for (TextView textView : textViews) {
             textView.setOnClickListener(v -> {
                 String value = textView.getText().toString();
@@ -135,7 +168,7 @@ public class SingleFilterWidget extends LinearLayout {
 
             });
         }
-    }
+    }*/
 
     private void setChanges(String text) {
         for (TextView textView : textViews) {
