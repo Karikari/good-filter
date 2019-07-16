@@ -8,7 +8,6 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SingleFilterWidget singleFilter = findViewById(R.id.pills);
-        MultiFilterWidget multiFilterWidget = findViewById(R.id.multi_filtter);
+        //MultiFilterWidget multiFilterWidget = findViewById(R.id.multi_filtter);
 
         List<String> list = new ArrayList<>();
         list.add("Any");
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         list.add("9+");
         list.add("10+");
         list.add("11+");
-        //pillsWidgets.setItems(list);
+        //pillsWidgets.setStringValues(list);
 
         List<String> items = new ArrayList<>();
         items.add("All");
@@ -77,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         itemdefault.add("Football");
 
 
-        singleFilter.setItems(items);
-        singleFilter.setDefaultValue("All"); //Set a default value
+        //singleFilter.setDefaultValue("All"); //Set a default value
+        singleFilter.setStringValues(items);
         singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
             @Override
             public void onFiltered(String v) {
@@ -87,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        multiFilterWidget.setDefaultValues(itemdefault);
-        multiFilterWidget.setItems(items);
+        //multiFilterWidget.setDefaultValues(itemdefault);
+      /*  multiFilterWidget.setStringValues(items);
 
         multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {
             @Override
@@ -101,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
 
     }
 

@@ -17,9 +17,9 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class ComboView extends LinearLayout {
+public class TextCombo extends LinearLayout {
 
-    public static final String TAG = ComboView.class.getSimpleName();
+    public static final String TAG = TextCombo.class.getSimpleName();
     private String value;
     private Boolean valueSelect = false;
     private int icon;
@@ -34,35 +34,37 @@ public class ComboView extends LinearLayout {
 
     private TextView mValue;
     private ImageButton mIcon;
-    private RelativeLayout mLayout;
+    private LinearLayout mLayout;
     private int orientation = 0;
 
-    public ComboView(Context context) {
+    public TextCombo(Context context) {
         super(context);
         init(context);
     }
 
-    public ComboView(Context context, int orientation) {
+    public TextCombo(Context context, int orientation) {
         super(context);
         this.orientation = orientation;
         init(context);
     }
 
-    public ComboView(Context context, @Nullable AttributeSet attrs) {
+    public TextCombo(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+    }
+
+    public TextCombo(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     private void init(Context context){
         View view;
         if(this.orientation == 0){
-            view = inflate(context, R.layout.item_row, this);
+            view = inflate(context, R.layout.item_row_text, this);
         }else{
-            view = inflate(context, R.layout.item_row_horizontal, this);
+            view = inflate(context, R.layout.item_row_text_horizontal, this);
 
         }
         this.mValue = view.findViewById(R.id.text);
-        this.mIcon = view.findViewById(R.id.icon);
         this.mLayout = view.findViewById(R.id.item_layout);
     }
 
@@ -107,11 +109,11 @@ public class ComboView extends LinearLayout {
     }
 
 
-    public RelativeLayout getmLayout() {
+    public LinearLayout getmLayout() {
         return mLayout;
     }
 
-    public void setmLayout(RelativeLayout mLayout) {
+    public void setmLayout(LinearLayout mLayout) {
         this.mLayout = mLayout;
     }
 
