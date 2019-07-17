@@ -102,30 +102,45 @@
     //You can also use the existing POJO class (Item)
     public class Item {
 
-    private String text;
-    private int icon = -1;
-    private Object tag;
+	    private String text;
+	    private int icon = -1;
+	    private Object tag;
 
-    public Item() {
-    }
+	    public Item() {
+	    }
 
-    public Item(String text) {
-        this.text = text;
-    }
+	    public Item(String text) {
+		this.text = text;
+	    }
 
-    public Item(String text, int icon) {
-        this.text = text;
-        this.icon = icon;
-    }
+	    public Item(String text, int icon) {
+		this.text = text;
+		this.icon = icon;
+	    }
 
-    public Item(String text, int icon, Object tag) {
-        this.text = text;
-        this.icon = icon;
-        this.tag = tag;
-    }
-    ....
-    getters and setters
-}
+	    public Item(String text, int icon, Object tag) {
+		this.text = text;
+		this.icon = icon;
+		this.tag = tag;
+	    }
+	    ....
+	    getters and setters
+   }
+     List<Item> list1 = new ArrayList<>();
+     list1.add(new Item("Captain America"));
+     list1.add(new Item("Iron Man"));
+     list1.add(new Item("Spider Man"));
+     list1.add(new Item("War Machine"));
+     list1.add(new Item("Black Widow"));
+     
+     singleFilter.setItemValues(list1);
+     singleFilter.setOnItemFilterChangeListener(new SingleFilterWidget.ItemFilterChangeListener() {
+            @Override
+            public void onFiltered(Item item) {
+
+            }
+     });
+     
 ```
 ### MultiFilterWidget
 
