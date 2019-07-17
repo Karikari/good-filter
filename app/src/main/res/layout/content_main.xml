@@ -11,10 +11,13 @@
     tools:showIn="@layout/activity_main">
 
     <com.karikari.goodfilter.MultiFilterWidget
+        android:visibility="visible"
         android:id="@+id/multi_filtter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:orientation="horizontal"
+        app:active_icon="@drawable/star_black_hollow"
+        app:selected_icon="@drawable/star_black"
         app:textSize="18sp" />
 
     <com.karikari.goodfilter.SingleFilterWidget
@@ -25,6 +28,8 @@
         app:orientation="horizontal"
         app:textSize="17sp"
         app:selected_text_color="@color/colorAccent"
+        app:active_background="@drawable/pill_bg"
+        app:selected_background="@drawable/pill_selected_bg"
         app:text_color="@color/black_olive" />
 
 </LinearLayout>

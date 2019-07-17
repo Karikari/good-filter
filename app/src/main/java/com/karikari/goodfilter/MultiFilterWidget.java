@@ -3,22 +3,24 @@ package com.karikari.goodfilter;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
+import com.karikari.goodfilter.adapters.MultiADP;
+import com.karikari.goodfilter.model.Item;
+import com.karikari.goodfilter.model.SelectableItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiFilterWidget extends LinearLayout {
+public class MultiFilterWidget extends LinearLayout implements MultiADP.OnItemSelectedListener {
 
     public static final String TAG = MultiFilterWidget.class.getSimpleName();
     private Context context;
@@ -26,20 +28,16 @@ public class MultiFilterWidget extends LinearLayout {
     private FilterChangeListener listener;
     private int orientation = 0;
     private float textSize = 0;
-    private Drawable background_active;
-    private Drawable background_selected;
-    private List<String> items = new ArrayList<>();
-    private List<TextView> textViews = new ArrayList<>();
-    private List<ComboView> comboViews = new ArrayList<>();
-    private List<String> selectedItems = new ArrayList<>();
-    private LinearLayout mPillLayout;
+    private int background_active;
+    private int background_selected;
     private int text_color;
     private int text_color_selected;
     private Typeface typeface;
-    private Drawable icon_active;
-    private Drawable icon_selected;
+    private int icon_active;
+    private int icon_selected;
     private String font_type;
     private List<String> defaultItems = new ArrayList<>();
+    private RecyclerView mRecyclerView;
 
     public MultiFilterWidget(Context context) {
         super(context);
@@ -65,21 +63,20 @@ public class MultiFilterWidget extends LinearLayout {
         try {
             this.orientation = typedArray.getInt(R.styleable.MultiFilterWidget_orientation, 0);
             this.textSize = typedArray.getDimensionPixelSize(R.styleable.MultiFilterWidget_textSize, 18);
-            this.background_active = typedArray.getDrawable(R.styleable.MultiFilterWidget_active_background);
-            this.background_selected = typedArray.getDrawable(R.styleable.MultiFilterWidget_selected_background);
-            this.icon_active = typedArray.getDrawable(R.styleable.MultiFilterWidget_active_icon);
-            this.icon_selected = typedArray.getDrawable(R.styleable.MultiFilterWidget_selected_icon);
+            this.background_active = typedArray.getResourceId(R.styleable.MultiFilterWidget_active_background, -1);
+            this.background_selected = typedArray.getResourceId(R.styleable.MultiFilterWidget_selected_background, -1);
+            this.icon_active = typedArray.getResourceId(R.styleable.MultiFilterWidget_active_icon, -1);
+            this.icon_selected = typedArray.getResourceId(R.styleable.MultiFilterWidget_selected_icon, -1);
             this.text_color = typedArray.getColor(R.styleable.MultiFilterWidget_text_color, getResources().getColor(R.color.black_olive));
             this.text_color_selected = typedArray.getColor(R.styleable.MultiFilterWidget_selected_text_color, getResources().getColor(R.color.colorAccent));
             this.font_type = typedArray.getString(R.styleable.MultiFilterWidget_font_family);
 
-
-            if (this.background_active == null) {
-                this.background_active = getResources().getDrawable(R.drawable.multi_bg);
+            if (this.background_active == -1) {
+                this.background_active = R.drawable.multi_bg;
             }
 
-            if (this.background_selected == null) {
-                this.background_selected = getResources().getDrawable(R.drawable.multi_selected_bg);
+            if (this.background_selected == -1) {
+                this.background_selected = R.drawable.multi_selected_bg;
             }
 
             if (!TextUtils.isEmpty(font_type)) {
@@ -93,78 +90,48 @@ public class MultiFilterWidget extends LinearLayout {
 
     private void initView(Context context) {
         this.context = context;
-        View view;
-        if (this.orientation == 0) {
-            view = LayoutInflater.from(context).inflate(R.layout.pills_layout_vertical, this);
+        View view = LayoutInflater.from(context).inflate(R.layout.base_layout, this);
+        mRecyclerView = view.findViewById(R.id.single_recycler);
+
+    }
+
+    private void setItemsToRecycerler(List<SelectableItem> list) {
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.Adapter mAdapter;
+        RecyclerView.LayoutManager mLayoutManager;
+
+        if (this.orientation == 1) {
+            mLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         } else {
-            view = LayoutInflater.from(context).inflate(R.layout.pills_layout_horizontal, this);
+            mLayoutManager = new LinearLayoutManager(context);
         }
-        mPillLayout = view.findViewById(R.id.pill_layout);
-
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new MultiADP(context, list, this,
+                background_active,
+                background_selected,
+                orientation,
+                text_color,
+                text_color_selected,
+                typeface,
+                textSize,
+                icon_active,
+                icon_selected);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
-
-    private void setListItems() {
-        for (String s : items) {
-            ComboView comboView = new ComboView(context, orientation);
-            comboView.setValue(s);
-            comboView.setText_size(textSize);
-            comboView.setBackground_active(background_active);
-            //multiView.setBackground_selected(background_selected);
-            comboView.setText_color(text_color);
-            if (text_color_selected != -1)
-                comboView.setSelected_text_color(text_color_selected);
-
-            if (typeface != null) {
-                comboView.setFontType(typeface);
-            }
-
-            comboView.setIcons(icon_active, icon_selected);
-
-            comboViews.add(comboView);
-            mPillLayout.addView(comboView);
+    @Override
+    public void onItemSelected(String item) {
+        if(listener!=null){
+            listener.onFiltered(item);
         }
     }
 
-    private void setListeners() {
-
-        for (ComboView comboView : comboViews) {
-
-            comboView.getmLayout().setOnClickListener(v -> {
-                comboView.setValueSelect(comboView.isValueSelected());
-                boolean isSelected = comboView.isValueSelected();
-                String value = comboView.getValue();
-                addOrRemoveItem(isSelected, value);
-            });
-
-            if(defaultItems.size()!=0){
-                comboView.setDefault(defaultItems);
-            }
+    public void setStringValues(List<String> list) {
+        List<SelectableItem> items = new ArrayList<>();
+        for (String s : list) {
+            items.add(new SelectableItem(new Item(s), false));
         }
-    }
-
-    private void addOrRemoveItem(boolean op, String value){
-        if(op){
-            selectedItems.add(value);
-        }else{
-            selectedItems.remove(value);
-        }
-        String values = new Gson().toJson(selectedItems);
-        //Log.d(TAG, "Items Selected : "+values);
-        if(this.listener!=null){
-            this.listener.onFiltered(values);
-            this.listener.onFiltered(selectedItems);
-        }
-    }
-
-    public void setItems(List<String> list) {
-        this.items = list;
-        setListItems();
-        setListeners();
-    }
-
-    public void setDefaultValues(List<String> items){
-        this.defaultItems =items;
+        setItemsToRecycerler(items);
     }
 
 
@@ -174,7 +141,6 @@ public class MultiFilterWidget extends LinearLayout {
 
     public interface FilterChangeListener {
         void onFiltered(String v);
-        void onFiltered(List<String> items);
     }
 
 

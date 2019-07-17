@@ -4,10 +4,12 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.karikari.goodfilter.model.Item;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SingleFilterWidget singleFilter = findViewById(R.id.pills);
-        //MultiFilterWidget multiFilterWidget = findViewById(R.id.multi_filtter);
+        MultiFilterWidget multiFilterWidget = findViewById(R.id.multi_filtter);
 
         List<String> list = new ArrayList<>();
         list.add("Any");
@@ -75,32 +77,35 @@ public class MainActivity extends AppCompatActivity {
         itemdefault.add("Mercy with Juctice");
         itemdefault.add("Football");
 
+        List<Item> list1 = new ArrayList<>();
+        list1.add(new Item("Star Boy", R.drawable.star_black_hollow));
+        list1.add(new Item("Cup", R.drawable.check));
+        list1.add(new Item("Charger", R.drawable.star_black_hollow));
+        list1.add(new Item("Fart", R.drawable.check));
+
 
         //singleFilter.setDefaultValue("All"); //Set a default value
-        singleFilter.setStringValues(items);
+        //singleFilter.setStringValues(items);
+        singleFilter.setItemValues(list1);
         singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
             @Override
             public void onFiltered(String v) {
-
+                Log.d("MainActivity", v);
             }
         });
 
 
         //multiFilterWidget.setDefaultValues(itemdefault);
-      /*  multiFilterWidget.setStringValues(items);
-
+        //multiFilterWidget.setStringValues(items);
+        multiFilterWidget.setStringValues(items);
         multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {
             @Override
             public void onFiltered(String v) {
-                //Log.d(TAG, v);
+                Log.d("MainActivity", v);
             }
 
-            @Override
-            public void onFiltered(List<String> items) {
-
-            }
         });
-*/
+
     }
 
     @Override

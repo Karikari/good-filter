@@ -1,4 +1,4 @@
-package com.karikari.goodfilter.model;
+package com.karikari.goodfilter2.model;
 
 public class Item {
 

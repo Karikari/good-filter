@@ -1,8 +1,7 @@
-package com.karikari.goodfilter.adapters;
+package com.karikari.goodfilter2.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +13,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.karikari.goodfilter.R;
-import com.karikari.goodfilter.model.SelectableItem;
+import com.google.gson.Gson;
+import com.karikari.goodfilter2.R;
+import com.karikari.goodfilter2.model.SelectableItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
+public class MultiADP extends RecyclerView.Adapter<MultiADP.ViewHolder> {
 
-    private static final String TAG = SingleADP.class.getSimpleName();
+    private static final String TAG = MultiADP.class.getSimpleName();
 
     private Context context;
     private List<SelectableItem> selectableItems = new ArrayList<>();
@@ -35,20 +35,27 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
     private int text_color_selected;
     private Typeface typeface;
     private float text_size;
+    private int active_icon;
+    private int selected_icon;
+
+    private List<String> selectedItems = new ArrayList<>();
+
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    public SingleADP(Context context, List<SelectableItem> itemList,
-                     OnItemSelectedListener listener,
-                     int active,
-                     int selected,
-                     int orientation,
-                     int text_color,
-                     int text_color_selected,
-                     Typeface typeface,
-                     float text_size) {
+    public MultiADP(Context context, List<SelectableItem> itemList,
+                    OnItemSelectedListener listener,
+                    int active,
+                    int selected,
+                    int orientation,
+                    int text_color,
+                    int text_color_selected,
+                    Typeface typeface,
+                    float text_size,
+                    int active_icon,
+                    int selected_icon) {
         this.context = context;
         this.active = active;
         this.selected = selected;
@@ -58,15 +65,14 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
         this.text_color_selected = text_color_selected;
         this.typeface = typeface;
         this.text_size = text_size;
+        this.active_icon = active_icon;
+        this.selected_icon = selected_icon;
         this.selectableItems = itemList;
 
-      /*  for (Item item : itemList){
-            selectableItems.add(new SelectableItem(item, false));
-        }*/
     }
 
     @Override
-    public SingleADP.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MultiADP.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         if (orientation == 1) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_horizontal, parent, false);
@@ -74,11 +80,11 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
 
         }
-        return new SingleADP.ViewHolder(view);
+        return new MultiADP.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(SingleADP.ViewHolder holder, int position) {
+    public void onBindViewHolder(MultiADP.ViewHolder holder, int position) {
         holder.bindView(position);
     }
 
@@ -108,8 +114,8 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mText;
-        private RelativeLayout mLayout;
         private ImageButton mIcon;
+        private RelativeLayout mLayout;
 
         ViewHolder(View view) {
             super(view);
@@ -123,35 +129,32 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
         @Override
         public void onClick(View v) {
             SelectableItem selectableItem = getItem(getAdapterPosition());
-            setChanges(selectableItem);
+            if(selectableItem!=null){
+                setChanges(selectableItem);
+            }
         }
 
         void bindView(int position) {
             SelectableItem selectableItem = getItem(position);
             if (selectableItem != null) {
-                if (!selectableItem.isSelected()) {
-                    mText.setText(selectableItem.getText());
-                    mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
-                    mText.setTextColor(text_color);
-
-                    if (selectableItem.getIcon() != -1) {
-                        mIcon.setVisibility(View.VISIBLE);
-                        mIcon.setImageResource(selectableItem.getIcon());
-                        mIcon.setColorFilter(text_color);
-                    }
-                    mLayout.setBackgroundResource(active);
-
-                } else {
+                if (selectableItem.isSelected()) {
                     mText.setText(selectableItem.getText());
                     mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
                     mText.setTextColor(text_color_selected);
-
-                    if (selectableItem.getIcon() != -1) {
+                    if (selected_icon != -1) {
                         mIcon.setVisibility(View.VISIBLE);
-                        mIcon.setColorFilter(text_color_selected);
+                        mIcon.setImageResource(selected_icon);
                     }
-
                     mLayout.setBackgroundResource(selected);
+                } else {
+                    mText.setText(selectableItem.getText());
+                    mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
+                    mText.setTextColor(text_color);
+                    if (active_icon != -1) {
+                        mIcon.setVisibility(View.VISIBLE);
+                        mIcon.setImageResource(active_icon);
+                    }
+                    mLayout.setBackgroundResource(active);
                 }
 
                 if (typeface != null) {
@@ -161,22 +164,33 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
         }
 
         private void setChanges(SelectableItem selectableItem) {
-            for (SelectableItem item : selectableItems) {
-                if (!TextUtils.equals(item.getText().trim(), selectableItem.getText().trim()) && item.isSelected()) {
-                    item.setSelected(false);
-                } else if (TextUtils.equals(item.getText().trim(), selectableItem.getText().trim()) && !item.isSelected()) {
-                    item.setSelected(true);
-                }
+            if (selectableItem.isSelected()) {
+                selectableItem.setSelected(false);
+            } else {
+                selectableItem.setSelected(true);
             }
-            notifyDataSetChanged();
-            listener.onItemSelected(selectableItem);
+            addRemove(selectableItem.isSelected(), selectableItem.getText());
+
+
         }
+
+        private void addRemove(boolean p, String value){
+            if(p){
+                selectedItems.add(value);
+            }else{
+                selectedItems.remove(value);
+            }
+
+            notifyDataSetChanged();
+            listener.onItemSelected(new Gson().toJson(selectedItems));
+        }
+
 
     }
 
 
     public interface OnItemSelectedListener {
-        void onItemSelected(SelectableItem item);
+        void onItemSelected(String item);
     }
 
 }

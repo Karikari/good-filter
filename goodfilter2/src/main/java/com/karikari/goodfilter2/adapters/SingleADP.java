@@ -1,4 +1,4 @@
-package com.karikari.goodfilter.adapters;
+package com.karikari.goodfilter2.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.karikari.goodfilter.R;
-import com.karikari.goodfilter.model.SelectableItem;
+import com.karikari.goodfilter2.R;
+import com.karikari.goodfilter2.model.SelectableItem;
 
 import java.util.ArrayList;
 import java.util.List;

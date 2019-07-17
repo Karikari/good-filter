@@ -3,41 +3,41 @@ package com.karikari.goodfilter2;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import com.karikari.goodfilter2.adapters.SingleADP;
+import com.karikari.goodfilter2.model.Item;
+import com.karikari.goodfilter2.model.SelectableItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SingleFilterWidget extends LinearLayout {
+public class SingleFilterWidget extends LinearLayout implements SingleADP.OnItemSelectedListener {
 
     public static final String TAG = SingleFilterWidget.class.getSimpleName();
     private Context context;
 
     private FilterChangeListener listener;
+    private ItemFilterChangeListener listener1;
     private int orientation = 0;
     private float textSize = 0;
-    private Drawable background_active;
-    private Drawable background_selected;
-    private List<String> items = new ArrayList<>();
-    private List<TextView> textViews = new ArrayList<>();
-    private LinearLayout mPillLayout;
-    private LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    private int background_active;
+    private int background_selected;
     private int text_color;
     private int text_color_selected;
     private Typeface typeface;
     private String selected_valued;
-
+    private RecyclerView mRecyclerView;
     private String font_type;
 
     public SingleFilterWidget(Context context) {
@@ -49,14 +49,15 @@ public class SingleFilterWidget extends LinearLayout {
         super(context, attrs);
         initAttributes(context, attrs);
         initView(context);
+
     }
 
     public SingleFilterWidget(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttributes(context, attrs);
         initView(context);
-
     }
+
 
     private void initAttributes(Context context, AttributeSet attrs) {
 
@@ -64,20 +65,21 @@ public class SingleFilterWidget extends LinearLayout {
         try {
             this.orientation = typedArray.getInt(R.styleable.SingleFilterWidget_orientation, 0);
             this.textSize = typedArray.getDimensionPixelSize(R.styleable.SingleFilterWidget_textSize, 18);
-            this.background_active = typedArray.getDrawable(R.styleable.SingleFilterWidget_active_background);
-            this.background_selected = typedArray.getDrawable(R.styleable.SingleFilterWidget_selected_background);
+            this.background_active = typedArray.getResourceId(R.styleable.SingleFilterWidget_active_background, -1);
+            this.background_selected = typedArray.getResourceId(R.styleable.SingleFilterWidget_selected_background, -1);
             this.text_color = typedArray.getColor(R.styleable.SingleFilterWidget_text_color, getResources().getColor(R.color.black_olive));
             this.text_color_selected = typedArray.getColor(R.styleable.SingleFilterWidget_selected_text_color, getResources().getColor(R.color.colorPrimaryDark));
             this.font_type = typedArray.getString(R.styleable.SingleFilterWidget_font_family);
 
 
-            if (this.background_active == null) {
-                this.background_active = getResources().getDrawable(R.drawable.pill_bg);
+            if (this.background_active == -1) {
+                this.background_active = R.drawable.pill_bg;
             }
 
-            if (this.background_selected == null) {
-                this.background_selected = getResources().getDrawable(R.drawable.pill_selected_bg);
+            if (this.background_selected == -1) {
+                this.background_selected = R.drawable.pill_selected_bg;
             }
+
             if (!TextUtils.isEmpty(font_type)) {
                 typeface = Typeface.createFromAsset(context.getAssets(), "fonts/" + font_type + ".ttf");
             }
@@ -89,79 +91,64 @@ public class SingleFilterWidget extends LinearLayout {
 
     private void initView(Context context) {
         this.context = context;
-        View view;
-        if (this.orientation == 0) {
-            view = LayoutInflater.from(context).inflate(R.layout.pills_layout_vertical, this);
+        View view = LayoutInflater.from(context).inflate(R.layout.base_layout, this);
+        mRecyclerView = view.findViewById(R.id.single_recycler);
+    }
+
+    private void setItemsToRecycerler(List<SelectableItem> list) {
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.Adapter mAdapter;
+        RecyclerView.LayoutManager mLayoutManager;
+
+        if (this.orientation == 1) {
+            mLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         } else {
-            view = LayoutInflater.from(context).inflate(R.layout.pills_layout_horizontal, this);
+            mLayoutManager = new LinearLayoutManager(context);
         }
-        mPillLayout = view.findViewById(R.id.pill_layout);
-
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new SingleADP(context, list, this,
+                background_active,
+                background_selected,
+                orientation,
+                text_color,
+                text_color_selected,
+                typeface,
+                textSize);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
-
-    private void setListPills() {
-        for (String s : items) {
-            params.setMargins(0, 10, 0, 5);
-            TextView textView = new TextView(context);
-            textView.setText(s);
-            textView.setTextColor(text_color);
-            if (typeface != null) {
-                textView.setTypeface(typeface);
-            }
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-            if (orientation == 1) {
-                params.setMargins(0, 10, 30, 5);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            }
-            textView.setBackground(background_active);
-            textView.setLayoutParams(params);
-            textViews.add(textView);
-            mPillLayout.addView(textView);
+    @Override
+    public void onItemSelected(SelectableItem item) {
+        if (listener != null) {
+            listener.onFiltered(item.getText());
+        }
+        if (listener1 != null) {
+            listener1.onFiltered(item);
         }
     }
 
-    private void setListeners() {
-        for (TextView textView : textViews) {
-            textView.setOnClickListener(v -> {
-                String value = textView.getText().toString();
-                if (this.listener != null) {
-                    listener.onFiltered(value);
-                    setChanges(value);
-                } else {
-                    setChanges(value);
-                }
-                Log.d(TAG, "ITEM : " + value);
-
-            });
-        }
-    }
-
-    private void setChanges(String text) {
-        for (TextView textView : textViews) {
-
-            if (TextUtils.equals(text, textView.getText().toString())) {
-                this.selected_valued = text;
-                textView.setBackground(null);
-                textView.setTextColor(text_color_selected);
-                textView.setBackground(background_selected);
-                textView.setLayoutParams(params);
+    public void setStringValues(List<String> list) {
+        List<SelectableItem> items = new ArrayList<>();
+        for (String s : list) {
+            if (!TextUtils.isEmpty(selected_valued) && TextUtils.equals(s, selected_valued)) {
+                items.add(new SelectableItem(new Item(s), true));
             } else {
-                textView.setBackground(null);
-                textView.setTextColor(text_color);
-                textView.setBackground(background_active);
-                textView.setLayoutParams(params);
-            }
-            if (orientation == 1) {
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                items.add(new SelectableItem(new Item(s), false));
             }
         }
+        setItemsToRecycerler(items);
     }
 
-    public void setItems(List<String> list) {
-        this.items = list;
-        setListPills();
-        setListeners();
+    public void setItemValues(List<Item> itemList) {
+        List<SelectableItem> items = new ArrayList<>();
+        for (Item s : itemList) {
+            if (!TextUtils.isEmpty(selected_valued) && TextUtils.equals(s.getText(), selected_valued)) {
+                items.add(new SelectableItem(s, true));
+            } else {
+                items.add(new SelectableItem(s, false));
+            }
+        }
+        setItemsToRecycerler(items);
     }
 
     public String getDefaultValue() {
@@ -170,16 +157,22 @@ public class SingleFilterWidget extends LinearLayout {
 
     public void setDefaultValue(String selected_valued) {
         this.selected_valued = selected_valued;
-        setChanges(this.selected_valued);
     }
 
     public void setOnFilterChangeListener(FilterChangeListener listener) {
         this.listener = listener;
     }
 
+    public void setOnItemFilterChangeListener(ItemFilterChangeListener listener1) {
+        this.listener1 = listener1;
+    }
+
     public interface FilterChangeListener {
         void onFiltered(String v);
     }
 
+    public interface ItemFilterChangeListener {
+        void onFiltered(Item item);
+    }
 
 }
