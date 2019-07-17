@@ -91,14 +91,41 @@
    items.add("CAF");
    items.add("All be lies");
    
-    singleFilter.setItems(items);
-    singleFilter.setDefaultValue("All"); //Set a default value. if needed
+    singleFilter.setStringValues(items);
     singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
          @Override
          public void onFiltered(String v) {
                 
          }
     });
+    
+    //You can also use the existing POJO class (Item)
+    public class Item {
+
+    private String text;
+    private int icon = -1;
+    private Object tag;
+
+    public Item() {
+    }
+
+    public Item(String text) {
+        this.text = text;
+    }
+
+    public Item(String text, int icon) {
+        this.text = text;
+        this.icon = icon;
+    }
+
+    public Item(String text, int icon, Object tag) {
+        this.text = text;
+        this.icon = icon;
+        this.tag = tag;
+    }
+    ....
+    getters and setters
+}
 ```
 ### MultiFilterWidget
 
