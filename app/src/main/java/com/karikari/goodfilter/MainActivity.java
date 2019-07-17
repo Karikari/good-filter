@@ -68,20 +68,12 @@ public class MainActivity extends AppCompatActivity {
         items.add("CAF");
         items.add("All be lies");
 
-        List<String> itemdefault = new ArrayList<>();
-        itemdefault.add("All");
-        itemdefault.add("Water");
-        itemdefault.add("Phones");
-        itemdefault.add("Coke Bottles");
-        itemdefault.add("Table and Chair");
-        itemdefault.add("Mercy with Juctice");
-        itemdefault.add("Football");
-
         List<Item> list1 = new ArrayList<>();
-        list1.add(new Item("Star Boy", R.drawable.star_black_hollow));
-        list1.add(new Item("Cup", R.drawable.check));
-        list1.add(new Item("Charger", R.drawable.star_black_hollow));
-        list1.add(new Item("Fart", R.drawable.check));
+        list1.add(new Item("Captain America", R.drawable.star_black_hollow));
+        list1.add(new Item("Iron Man", R.drawable.check));
+        list1.add(new Item("Spider Man", R.drawable.star_black_hollow));
+        list1.add(new Item("War Machine", R.drawable.check));
+        list1.add(new Item("Black Widow", R.drawable.check));
 
 
         //singleFilter.setDefaultValue("All"); //Set a default value
@@ -91,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFiltered(String v) {
                 Log.d("MainActivity", v);
+            }
+        });
+
+        singleFilter.setOnItemFilterChangeListener(new SingleFilterWidget.ItemFilterChangeListener() {
+            @Override
+            public void onFiltered(Item item) {
+
             }
         });
 

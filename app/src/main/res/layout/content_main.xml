@@ -25,7 +25,7 @@
         android:id="@+id/pills"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:orientation="horizontal"
+        app:orientation="vertical"
         app:textSize="17sp"
         app:selected_text_color="@color/colorAccent"
         app:active_background="@drawable/pill_bg"
