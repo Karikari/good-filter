@@ -37,7 +37,6 @@ public class MultiADP extends RecyclerView.Adapter<MultiADP.ViewHolder> {
     private float text_size;
     private int active_icon;
     private int selected_icon;
-
     private List<String> selectedItems = new ArrayList<>();
 
 
@@ -78,7 +77,6 @@ public class MultiADP extends RecyclerView.Adapter<MultiADP.ViewHolder> {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_horizontal, parent, false);
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
-
         }
         return new MultiADP.ViewHolder(view);
     }
@@ -174,8 +172,6 @@ public class MultiADP extends RecyclerView.Adapter<MultiADP.ViewHolder> {
                 selectableItem.setSelected(true);
             }
             addRemove(selectableItem.isSelected(), selectableItem.getText());
-
-
         }
 
         private void addRemove(boolean p, String value){

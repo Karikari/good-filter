@@ -24,6 +24,10 @@ public class Item {
         this.tag = tag;
     }
 
+    public Item(String text, Object tag) {
+        this.text = text;
+        this.tag = tag;
+    }
 
     public String getText() {
         return text;
