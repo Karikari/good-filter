@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.karikari.goodfilter2.R;
 import com.karikari.goodfilter2.model.SelectableItem;
 
@@ -133,11 +134,12 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
                     mText.setText(selectableItem.getText());
                     mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
                     mText.setTextColor(text_color);
-
                     if (selectableItem.getIcon() != -1) {
                         mIcon.setVisibility(View.VISIBLE);
                         mIcon.setImageResource(selectableItem.getIcon());
                         mIcon.setColorFilter(text_color);
+                    }else{
+                        mIcon.setImageResource(0);
                     }
                     mLayout.setBackgroundResource(active);
 
@@ -145,10 +147,11 @@ public class SingleADP extends RecyclerView.Adapter<SingleADP.ViewHolder> {
                     mText.setText(selectableItem.getText());
                     mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size);
                     mText.setTextColor(text_color_selected);
-
                     if (selectableItem.getIcon() != -1) {
                         mIcon.setVisibility(View.VISIBLE);
                         mIcon.setColorFilter(text_color_selected);
+                    }else{
+                        mIcon.setImageResource(0);
                     }
 
                     mLayout.setBackgroundResource(selected);

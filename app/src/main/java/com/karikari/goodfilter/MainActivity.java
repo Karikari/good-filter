@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         items.add("All be lies");
 
         List<Item> list1 = new ArrayList<>();
-        list1.add(new Item("Captain America", R.drawable.star_black_hollow));
+        list1.add(new Item("Captain America"));
         list1.add(new Item("Iron Man", R.drawable.check));
         list1.add(new Item("Spider Man", R.drawable.star_black_hollow));
         list1.add(new Item("War Machine", R.drawable.check));

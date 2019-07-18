@@ -144,6 +144,8 @@ public class MultiADP extends RecyclerView.Adapter<MultiADP.ViewHolder> {
                     if (selected_icon != -1) {
                         mIcon.setVisibility(View.VISIBLE);
                         mIcon.setImageResource(selected_icon);
+                    }else{
+                        mIcon.setImageResource(0);
                     }
                     mLayout.setBackgroundResource(selected);
                 } else {
@@ -153,6 +155,8 @@ public class MultiADP extends RecyclerView.Adapter<MultiADP.ViewHolder> {
                     if (active_icon != -1) {
                         mIcon.setVisibility(View.VISIBLE);
                         mIcon.setImageResource(active_icon);
+                    }else{
+                        mIcon.setImageResource(0);
                     }
                     mLayout.setBackgroundResource(active);
                 }
