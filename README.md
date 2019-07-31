@@ -91,6 +91,7 @@
    items.add("CAF");
    items.add("All be lies");
    
+   
     singleFilter.setStringValues(items);
     singleFilter.setOnFilterChangeListener(new SingleFilterWidget.FilterChangeListener() {
          @Override
