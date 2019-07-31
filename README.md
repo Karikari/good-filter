@@ -22,7 +22,7 @@
 **Step 2** Add the dependency
 ```gradle
    dependencies {
-	        implementation 'com.github.Karikari:good-filter:0.0.5'
+	        implementation 'com.github.Karikari:good-filter:0.0.10'
 	}
 ```
 **Add the View to your layout**
@@ -197,14 +197,7 @@ The attribute is the same as the SingleFilterWidget
    items.add("CAF");
    items.add("All be lies");
    
-   List<String> defaultvalues = new ArrayList<>();
-   itemdefault.add("All");
-   itemdefault.add("Water");
-   itemdefault.add("Phones");
-   itemdefault.add("Coke Bottles");
-   
    multiFilterWidget.setItems(items);
-   multiFilterWidget.setDefaultValues(defaultvalues); //Set a default value. if needed
    multiFilterWidget.setOnFilterChangeListener(new MultiFilterWidget.FilterChangeListener() {
         @Override
         public void onFiltered(String v) {
